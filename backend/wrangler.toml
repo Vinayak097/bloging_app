@@ -1,0 +1,6 @@
+name = "backendnewone"
+compatibility_date = "2023-12-01"
+
+[vars]
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZmZlODNkMzQtNWJjNi00NTRhLTkxYjctNDUwYmQxMGZiMDAxIiwidGVuYW50X2lkIjoiOTRmZjY0OThjNTM0ZmQ5ZDQ4MTA1NzA4MDE0NTIxNzc5MjMwZTdmOWNhYWM3MTg1YTk4MTIzYmJmNzM3NzYyMSIsImludGVybmFsX3NlY3JldCI6ImMwMGVmNzg4LTcxNGMtNDRhNC05YjdlLTg1YTFkYzJjOGQ4MiJ9.6SQ4Judq_I1oX6r5Dxi3u_dhQNRwpI33TffU5YyZKM4"
+JWT_SECRET="passabion"
