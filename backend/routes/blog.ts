@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
-import { blogInput} from "@vinay100xdev/blog-common"
+
 export const blogRouter=new Hono<{
     Bindings: {
         DATABASE_URL: string;
@@ -30,14 +30,22 @@ blogRouter.get('/', async (c) => {
 		datasourceUrl: c.env?.DATABASE_URL	,
 	}).$extends(withAccelerate());
 	
+	try{
 	const post = await prisma.post.findFirst({
 		where: {
 			id:body.id
 		}
+		
 	});
+	return c.json({post});
+}
+catch(e){
+	c.status(411);
+	return c.json({eorr: " blog not fond   "})
+}
     
 
-	return c.json({post});
+	
 })
 
 blogRouter.post('/', async(c) => {
@@ -47,6 +55,7 @@ blogRouter.post('/', async(c) => {
       }).$extends(withAccelerate());
     
     const body = await c.req.json();
+	try{
 	const post = await prisma.post.create({
 		data: {
 			title: body.title,
@@ -54,10 +63,18 @@ blogRouter.post('/', async(c) => {
 			authorId: userId
 		}
 	});
-    return c.json({
+	return c.json({
         id:post.id
         
     })
+}
+catch(e){
+	
+	return c.json({error :"error whiel posting  "+e})
+
+
+}
+ 
 })
 
 blogRouter.put('/', async(c) => {

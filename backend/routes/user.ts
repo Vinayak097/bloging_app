@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
-import { signupInput } from '@vinay100xdev/blog-common';
+
 export const userRouter = new Hono<{
     Bindings: {
         DATABASE_URL: string;

@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { userRouter } from '../routes/user';
-import signupInput from '@vinay100xdev/blog-common';
+import { cors } from 'hono/cors';
 import { blogRouter } from '../routes/blog';
 
 export const app = new Hono<{
@@ -13,7 +13,7 @@ export const app = new Hono<{
 	userId:string
   }
 }>();
-
+app.use('/*',cors())
 app.route('/api/v1/user', userRouter)
 app.route('api/v1/blog',blogRouter)
 // app.route('/api/v1/blog/*', async (c, next) => {
