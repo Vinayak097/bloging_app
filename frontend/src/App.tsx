@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Blog } from './pages/Blog'
+import { Blogs } from './pages/Blogs'
 import { Signup } from './pages/Signup'
 import { Signin } from './pages/Signin'
+import { Blog } from './pages/Blog'
 import './App.css'
 import {BrowserRouter ,Route,Routes} from 'react-router-dom'
 function App() {
@@ -17,8 +18,10 @@ function App() {
           <Routes>
             <Route path='/signup' element={<Signup></Signup>}></Route>
             <Route path='/signin' element={<Signin></Signin>}></Route>
-            <Route path='/blogs' element={<Blog></Blog>}></Route>
-            </Routes></BrowserRouter>
+            <Route path='/blogs' element={<Blogs></Blogs>}></Route>
+            <Route path='/blog' element={<Blog></Blog>}></Route>
+            </Routes>
+          </BrowserRouter>
         </div>
         
       </div>

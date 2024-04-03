@@ -1,31 +1,26 @@
-import { BlogCart } from "../components/BlogCard"
-import { Appbar } from "../components/Appbar"
-export function  Blog(){
-    return (
+import { useBlogs } from "../hooks"
+import { backend_url } from "../config"
+import axios from "axios"
+import { useEffect, useState } from "react"
+export const Blog=()=>{
+    const [blogs,setBlog]=useState({})
+    const fetchblog=()=>{
+        axios.get(`${backend_url}/api/v1/blog/bulk`,{
+            headers:{
+                Authorization:localStorage.getItem('token')
+            }
+        })
+        .then((response)=>{
+            setBlog(blog);
+        })
+    }
+    return <div className="p-2 ">
+        <button className="p-2 bg-green-400" onClick={()=>{fetchblog()}}>getblog</button>
         <div>
-            <Appbar></Appbar>
-        
-        <div className=" flex justify-center ">
-
-            <div className="max-w-xl">
-            <BlogCart authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-            <BlogCart authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-            <BlogCart authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-            <BlogCart  authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-            <BlogCart authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-            <BlogCart authorName="PeterV" title={"Loremor sitipisicing elit. Nisi, laboriosam totam aper"} 
-            content={"Lorem ipsum i culpa molestiae tempore eaque eius quaerat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, odio?"} publishedDate="Dec 3,2023"></BlogCart>            
-
-            </div>
+            Blogs
+            <div>
            
+            </div>
         </div>
-        </div>
-    )
-    } 
-    
-    
+    </div>
+}
