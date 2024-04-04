@@ -9,7 +9,7 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
     const navigate=useNavigate()
     const [password,setPassword]=useState("")
     const [email,setemail]=useState("")
-    const token=""
+    
     const getpostrequest = async () => {
         try { 
             const response = await axios.post(

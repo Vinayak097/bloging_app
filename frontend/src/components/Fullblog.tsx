@@ -1,5 +1,5 @@
 import { Appbar } from "./Appbar"
-import { Blog } from "../pages/Blog"
+
 import { Avatar } from "./BlogCard"
 export const Fullbog=({blog}:{blog:any})=>{
     return <div>
