@@ -20,7 +20,8 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
             localStorage.setItem("token", jwt.jwt);
             navigate("/blogs");
         } catch (error) {
-            console.error("Error:", error);
+            console.log("Error:", error);
+            alert("invalid username/password")
             return "Error occurred";
         }
     };

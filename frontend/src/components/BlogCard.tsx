@@ -5,7 +5,7 @@ interface BlogCardProps{
     title:string,
     content:string,
     publishedDate:string,
-    id:string
+    id:string |number
    
 }
 
@@ -37,7 +37,7 @@ export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps
     </div></Link>
     
 }
-function Circle(){
+export function Circle(){
     return <div className="h-1 w-1  rounded-full bg-slate-400">
 
     </div>

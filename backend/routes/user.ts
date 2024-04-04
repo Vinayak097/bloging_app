@@ -48,18 +48,23 @@ userRouter.post('/signin', async (c) => {
     }).$extends(withAccelerate());
 
     const body = await c.req.json();
+  
     const user = await prisma.user.findUnique({
         where: {
             email: body.email,
     password: body.password
         }
     });
-
+    
     if (!user) {
+        
+       
         c.status(403);
-        return c.json({ error: "user not found" });
+       return c.json("usser not found")
     }
+
 
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({ jwt });
+
 })
