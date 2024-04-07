@@ -3,16 +3,16 @@ import { useEffect, useState } from "react"
 import { backend_url } from "../config";
 
 interface Blogs{
-    "content":string,
-    "title":string,
-    "id":number,
-    "author":{
-        "name":string
+    content:string,
+    title:string,
+    id:number,
+    author:{
+        name:string
     }
 }
 
 export interface Blog {
-    id: string;
+
     content: string;
     title: string;
     author: {
@@ -22,13 +22,13 @@ export interface Blog {
   
   export const useBlog = (id:string) => {
     const [loading, setLoading] = useState(true);
-    const [blog, setBlog] = useState<Blog >();
+    const [blog, setBlog] = useState<Blog>();
     
   
     useEffect(() => {
       axios.get(`${backend_url}/api/v1/blog/${id}`, {
         headers: {
-          Authorization: localStorage.getItem("token") || ""
+          Authorization: localStorage.getItem("token") || " "
         }
       })
       .then((response) => {

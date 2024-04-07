@@ -8,8 +8,6 @@ import { Blog } from './pages/Blog'
 import './App.css'
 import {BrowserRouter ,Route,Routes} from 'react-router-dom'
 function App() {
-  
-
   return (
     < >
       <div className='' >
@@ -21,6 +19,7 @@ function App() {
             <Route path='/blogs' element={<Blogs></Blogs>}></Route>
             <Route path="/blog/:id" element={<Blog />} />
             <Route path='/publish' element={<Publish></Publish>}></Route>
+            <Route path='/' element={<Signup></Signup>}></Route>
             </Routes>
           </BrowserRouter>
         </div>
