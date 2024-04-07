@@ -1,6 +1,6 @@
 {
-  "name":"@vinay100xdev/blog-common",
-  "version": "1.0.1",
+  "name": "@100xdevs/mediumblog-common",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
