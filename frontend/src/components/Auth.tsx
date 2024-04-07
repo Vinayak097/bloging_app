@@ -2,15 +2,21 @@
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Spinner } from "./Spinner";
 import { useNavigate } from "react-router-dom";
+
 import {backend_url} from '../config.js'
 export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
     const [username,setusername]=useState("")
+    const [Loading,setloding]=useState(false);
     const navigate=useNavigate()
     const [password,setPassword]=useState("")
     const [email,setemail]=useState("")
+   
     
     const getpostrequest = async () => {
+        setloding(true)
+       
         try { 
             const response = await axios.post(
                 `${backend_url}/api/v1/user/${labeltype === "signup" ? "signup" : "signin"}`,
@@ -18,12 +24,17 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
             );
             const jwt = response.data;
             localStorage.setItem("token", jwt.jwt);
+            setloding(false)
             navigate("/blogs");
         } catch (error) {
+            
             console.log("Error:", error);
             alert("invalid username/password")
+            setloding(false)
             return "Error occurred";
+            
         }
+        
     };
     
     
@@ -55,7 +66,10 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
                         <LabelledInput  label="Email" placeholder="abc@gmailc.com" onChange={(e)=>{setemail(e.target.value)}}></LabelledInput>
                         <LabelledInput type="password" label="Password" placeholder="paswe34" onChange={(e)=>{setPassword(e.target.value)
                         }}></LabelledInput>
-                        <button onClick={()=>{getpostrequest()}} type="button" className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Submit</button>
+                        
+                        <button onClick={()=>{ 
+                            setloding(true)
+                            getpostrequest()}} type="button" className="w-full mt-4 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{Loading ?<Spinner></Spinner> :"Submit"}</button>
                         </div>
                 </div>
             </div>

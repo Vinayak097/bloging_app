@@ -2,11 +2,13 @@
 import { ChangeEvent, useState } from "react"
 import { Appbar } from "../components/Appbar"
 import axios from "axios";
+import { Spinner } from "../components/Spinner";
 import { backend_url } from "../config";
 import { useNavigate } from "react-router-dom";
 export const Publish = ()=>{
     const [title,setTitle]=useState("");
     const [content,setContent]=useState("");
+    const [Loading,setloding]=useState(false);
     const navigate=useNavigate();
 
     return <div>
@@ -20,7 +22,7 @@ export const Publish = ()=>{
                     <TextEditor onChange={(e)=>{setContent(e.target.value)}}></TextEditor>
                 </div>
                 <button onClick={
-                    ()=>{
+                    ()=>{setloding(true)
                         axios.post(`${backend_url}/api/v1/blog`,{
                             title,
                             content
@@ -31,11 +33,12 @@ export const Publish = ()=>{
                             }
                         })
                         .then((response)=>{console.log("successfully posted")
+                        setloding(false)
                         navigate(`/blog/${response.data.id}`)
                                             
                     })
                     }
-                } className="mt-4 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">Publish</button>
+                } className="mt-4 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">{Loading ?<Spinner></Spinner> :"Publish"}</button>
                 </div>
                 
             </div>  
