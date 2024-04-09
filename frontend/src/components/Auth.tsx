@@ -27,11 +27,9 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
             setloding(false)
             navigate("/blogs");
         } catch (error) {
-            
-            console.log("Error:", error);
             alert("invalid username/password")
             setloding(false)
-            return "Error occurred";
+            
             
         }
         
