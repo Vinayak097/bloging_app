@@ -2,7 +2,10 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
+//import {signupInput} from '../../common/dist/'
 
+import { object } from "zod";
+import zod from 'zod'
 
 export const userRouter = new Hono<{
     Bindings: {
@@ -10,18 +13,29 @@ export const userRouter = new Hono<{
         JWT_SECRET: string;
     }
 }>();
+const  zodsignupInput=zod.object({
+    email:zod.string().email(),
+    name:zod.string().nonempty(),
+    password:zod.string().min(6)
 
+})
+const zodsignininput=zod.object({
+    email:zod.string().email(),
+    password:zod.string().min(6)
+})
 userRouter.post('/signup', async (c) => {
     const body = await c.req.json();
-        
     
-    
+    const access =zodsignupInput.safeParse(body);
+    console.log("acceses :" ,access)
+    if(access.success){
+       
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
     
 
-    const exist=await prisma.user.findUnique({
+    const exist=await prisma.user.findFirst({
         where:{
             email:body.email
         }
@@ -33,13 +47,16 @@ userRouter.post('/signup', async (c) => {
       data: {
         email: body.email,
         password: body.password,
-        name:body.username||"hello"
+        name:body.username
       }
     });
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
     return c.json({
       jwt: token
     })
+}
+c.status(411)
+return c.json("invlaid inputs")
 })
   
 userRouter.post('/signin', async (c) => {
@@ -49,21 +66,21 @@ userRouter.post('/signin', async (c) => {
     }).$extends(withAccelerate());
 
     const body = await c.req.json();
-    
-   
-  
+    const success=zodsignininput.safeParse(body);
+    console.log(success)
+if(!success.success){
+    c.status(411)
+    return c.json({msg:"invlid inputs"})
+}
     const user = await prisma.user.findUnique({
         where: {
             email: body.email,
     password: body.password
         }
-    });
-    
+    });  
     if (!user) {
-        
-       
-        c.status(403);
-       return c.json("usser not found")
+        c.status(411);
+       return c.json({msg:"usser not found"})
     }
 
 

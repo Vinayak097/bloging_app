@@ -33,6 +33,45 @@ blogRouter.use('/*',async(c,next)=>{
 	c.set("name",payload? payload.name: "hello")
     await next()
 })
+blogRouter.get('/user/blogs/',async(c) =>{
+	const userId=await c.get('userId')
+
+	const prisma =new PrismaClient({
+		datasourceUrl:c.env.DATABASE_URL,
+	}).$extends(withAccelerate())
+	const blogs=await prisma.post.findMany({
+		where:{
+			authorId:userId
+		}
+		
+	})
+	return c.json(blogs)
+} )
+blogRouter.delete('/deletepost/:id',async(c)=>{
+
+	const postid=await c.req.json()
+	const prisma =new PrismaClient({
+		datasourceUrl:c.env.DATABASE_URL,
+	}).$extends(withAccelerate())
+	const delb=await prisma.post.delete({
+		where:{
+			id:postid
+		}
+	})
+	return c.json(delb)
+})
+// blogRouter.delete('/deleteallreset',async(c)=>{
+
+// 	const userId=c.get('userId')
+// 	const prisma =new PrismaClient({
+// 		datasourceUrl:c.env.DATABASE_URL,
+// 	}).$extends(withAccelerate())
+// 	const delb=await prisma.post.deleteMany({})
+// 	const userdlete=await prisma.user.deleteMany({})
+// 	return c.json({delb,userdlete})
+
+	
+// })
 blogRouter.get('/bulk', async (c) => {
 	const prisma = new PrismaClient({
 		datasourceUrl: c.env?.DATABASE_URL	,
@@ -136,6 +175,19 @@ catch(e){
 	return c.json({eorr: " blog not fond   "})
 }
 })
+
+
+
+
+	// const userWithPosts = await prisma.user.findUnique({
+	//   where: { id: userId },
+	//   include: {
+	// 	posts: true,
+	//   },
+	// });
+  
+
+
 
 
 
