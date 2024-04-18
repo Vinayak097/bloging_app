@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import {backend_url} from '../config.js'
 export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
-    const [username,setusername]=useState("")
+    const [name,setusername]=useState("")
     const [Loading,setloding]=useState(false);
     const navigate=useNavigate()
     const [password,setPassword]=useState("")
@@ -20,7 +20,7 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
         try { 
             const response = await axios.post(
                 `${backend_url}/api/v1/user/${labeltype === "signup" ? "signup" : "signin"}`,
-                { email, password,username }
+                { email, password,name }
             );
             const jwt = response.data;
             localStorage.setItem("token", jwt.jwt);

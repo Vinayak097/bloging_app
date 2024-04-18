@@ -2,7 +2,7 @@ import { BlogCart } from "../components/BlogCard"
 import { Appbar } from "../components/Appbar"
 import {  useBlogs } from "../hooks"
 import { Blogskeloton } from "../components/Blogskeleton";
-
+import { Menubar } from "../components/Menubar";
 
 
 export function  Blogs(){
@@ -13,6 +13,7 @@ export function  Blogs(){
         return <div className="">
             <Appbar></Appbar>
             <div className="mt-2 flex justify-center">
+                
                 <div className="mt-4">
                 <Blogskeloton></Blogskeloton>    
             <Blogskeloton></Blogskeloton>    
@@ -21,9 +22,6 @@ export function  Blogs(){
             <Blogskeloton></Blogskeloton>
             
                 </div>
-
-           
-             
             </div>
                  
         </div>
