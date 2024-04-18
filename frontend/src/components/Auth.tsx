@@ -6,12 +6,14 @@ import { Spinner } from "./Spinner";
 import { useNavigate } from "react-router-dom";
 
 import {backend_url} from '../config.js'
+import { loghook } from "../hooks/index.js";
 export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
     const [name,setusername]=useState("")
     const [Loading,setloding]=useState(false);
     const navigate=useNavigate()
     const [password,setPassword]=useState("")
     const [email,setemail]=useState("")
+    const {logtrue}=loghook()
    
     
     const getpostrequest = async () => {
@@ -25,12 +27,12 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
             const jwt = response.data;
             localStorage.setItem("token", jwt.jwt);
             setloding(false)
+            
+            
             navigate("/blogs");
         } catch (error) {
             alert("invalid username/password")
-            setloding(false)
-            
-            
+            setloding(false) 
         }
         
     };

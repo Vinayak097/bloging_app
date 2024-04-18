@@ -5,22 +5,21 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { backend_url } from "../config"
+import { loghook } from "../hooks"
+interface log {
+    logged:any,
+    logOut:any
+    Login:any
+}
 export const Appbar=()=>{
-    const [logged,setlogged]=useState(false)
-    const navigate=useNavigate()
+    const {logged,logOut,Login,logtrue}=loghook()
+    
    useEffect( ()=>{
-    async function getvalid() {
-        const valid=await axios.get(`${backend_url}/api/v1/blog/checklogin`) 
-        if(valid){
-            setlogged(true)
-            return
-        }
-        setlogged(false)
+    if(localStorage.getItem("token")){
+        logtrue()
         return
     }
-    getvalid()
-    
-    },[])
+    },[logged])
     
     return <div className="flex justify-between px-10 py-2 border-b">
      
@@ -33,11 +32,10 @@ export const Appbar=()=>{
             <Link to="/publish">New</Link>
         </div>
         <div >
-        <Avatar size={"big"} name="harkirat"></Avatar>
+            <Avatar size={"big"} name="harkirat"></Avatar>
         </div>
         <div className="mx-2 flex bg-slate-800 p-2 text-white rounded-md ">
-            <button onClick={()=>localStorage.clear()}>loout</button>
-            
+            <button onClick={logged ?  logOut:Login} > {logged? "Logout":"Login"}</button>
         </div>
             
         </div>
