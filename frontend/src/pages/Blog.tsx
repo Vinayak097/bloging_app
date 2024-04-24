@@ -12,7 +12,7 @@ export const Blog = () => {
   if (loading) {
     return <div className="">
     <Appbar></Appbar>
-    <div className="grid grid-cols-3 mt-2 flex justify-center">
+    <div className="grid grid-cols-3 mt-2 justify-center">
         <div className="mt-4 col-span-2">
         <Blogskeloton></Blogskeloton>    
     

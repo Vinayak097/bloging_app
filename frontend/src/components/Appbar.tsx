@@ -1,16 +1,12 @@
 
 import { Link } from "react-router-dom"
 import { Avatar } from "./BlogCard"
-import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { backend_url } from "../config"
+
+import { useEffect } from "react"
+
+
 import { loghook } from "../hooks"
-interface log {
-    logged:any,
-    logOut:any
-    Login:any
-}
+
 export const Appbar=()=>{
     const {logged,logOut,Login,logtrue}=loghook()
     

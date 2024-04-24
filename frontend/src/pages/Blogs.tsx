@@ -2,7 +2,7 @@ import { BlogCart } from "../components/BlogCard"
 import { Appbar } from "../components/Appbar"
 import {  useBlogs } from "../hooks"
 import { Blogskeloton } from "../components/Blogskeleton";
-import { Menubar } from "../components/Menubar";
+
 
 
 export function  Blogs(){
