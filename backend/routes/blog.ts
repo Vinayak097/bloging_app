@@ -2,14 +2,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
-interface postobj{
-	id :string,
-	title:string,
-	names:string,
-	content:string,
-	published:boolean,
-	authorId:string
-}
+
 export const blogRouter=new Hono<{
     Bindings: {
         DATABASE_URL: string;
@@ -24,7 +17,7 @@ export const blogRouter=new Hono<{
 blogRouter.use('/*',async(c,next)=>{
     const jwt=c.req.header("Authorization")|| "";
     const payload= await verify(jwt,c.env.JWT_SECRET)
-	c.set("payload",payload)
+	
     if(!payload){
         c.status(403)
         return c.json({error:"unathorization"})
@@ -33,8 +26,20 @@ blogRouter.use('/*',async(c,next)=>{
 	c.set("name",payload? payload.name: "hello")
     await next()
 })
+blogRouter.get('/checklogin',async(c)=>{
+	try{
+    const userId=c.get("userId")
+	if(userId){
+		return c.json("logged")
+	}
+}catch(e){
+
+	 c.status(403)
+	return c.json("not logged")
+}
+})
 blogRouter.get('/user/blogs/',async(c) =>{
-	const userId=await c.get('userId')
+	const userId=c.get('userId')
 
 	const prisma =new PrismaClient({
 		datasourceUrl:c.env.DATABASE_URL,
@@ -72,26 +77,7 @@ blogRouter.delete('/deletepost/:id',async(c)=>{
 
 	
 // })
-blogRouter.get('/bulk', async (c) => {
-	const prisma = new PrismaClient({
-		datasourceUrl: c.env?.DATABASE_URL	,
-	}).$extends(withAccelerate());
-	
-	const blogs = await prisma.post.findMany({
-		select:{
-			content:true,
-			title:true,
-			id:true,
-			author:{
-				select:{
-					name:true
-				}
-			}
-		}
-	});
 
-	return c.json({blogs});
-})
 blogRouter.post('/', async(c) => {
     const userId=c.get('userId');
     const prisma = new PrismaClient({
@@ -109,7 +95,6 @@ blogRouter.post('/', async(c) => {
 	});
 	return c.json({
         id:post.id
-        
     })
 }
 catch(e){
@@ -142,12 +127,10 @@ blogRouter.put('/', async(c) => {
 })
 
 blogRouter.get('/:id', async (c) => {
-	const bid= await c.req.param()
-	
+	const bid= c.req.param()
 	const prisma = new PrismaClient({
 		datasourceUrl: c.env?.DATABASE_URL	,
 	}).$extends(withAccelerate());
-	
 	try{
 	const post = await prisma.post.findFirst({
 		where: {	
@@ -163,13 +146,8 @@ blogRouter.get('/:id', async (c) => {
 			}
 		}
 	});
-
-	
-	
-	
 	return c.json({post});
 }
-
 catch(e){
 	c.status(411);
 	return c.json({eorr: " blog not fond   "})
@@ -178,14 +156,6 @@ catch(e){
 
 
 
-
-	// const userWithPosts = await prisma.user.findUnique({
-	//   where: { id: userId },
-	//   include: {
-	// 	posts: true,
-	//   },
-	// });
-  
 
 
 

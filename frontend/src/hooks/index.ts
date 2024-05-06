@@ -60,13 +60,14 @@ export const useBlogs=()=>{
     const [blogs,setBlogs]=useState<Blogs[]>([]);
 
     useEffect(()=>{
-        axios.get(`${backend_url}/api/v1/blog/bulk`,{
+        axios.get(`${backend_url}/api/v1/all/bulk`,{  
             headers:{
                 Authorization:localStorage.getItem("token")
             }
         })
         .then((response)=>{
-            const array=response.data.blogs
+            const array=response.data
+            console.log(array)
             setBlogs(array);
             setLoading(false)
         })
@@ -92,3 +93,5 @@ export const loghook=()=>{
   }
   return {logged,logOut,Login,logtrue}
 }
+
+

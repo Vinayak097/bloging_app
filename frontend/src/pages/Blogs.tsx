@@ -8,6 +8,7 @@ import { Blogskeloton } from "../components/Blogskeleton";
 export function  Blogs(){
     
     const {loading,blogs}=useBlogs();
+    console.log("blogs :" ,blogs)
     
     if(loading){
         return <div className="">
@@ -37,6 +38,7 @@ export function  Blogs(){
             <div className=" ">
                 
             {blogs.map(blog => (
+                
     <BlogCart
        
          // Assuming each blog has a unique ID
