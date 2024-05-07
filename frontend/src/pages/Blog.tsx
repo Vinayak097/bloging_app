@@ -2,12 +2,13 @@ import { Appbar } from "../components/Appbar";
 import { Blogskeloton } from "../components/Blogskeleton";
 import { Fullbog } from "../components/Fullblog";
 import { useBlog } from "../hooks";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export const Blog = () => {
   const {id}=useParams()
   const { loading, blog } = useBlog(id || "feb93749-eb56-449c-921a-41a30d904be0");
-  const navigate=useNavigate();
+  const navigate=useNavigate()
 
   if (loading) {
     return <div className="">
