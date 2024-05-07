@@ -39,8 +39,8 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
     };
     
     
-    return <div className="h-screen flex justify-center flex-col">
-        <div className="flex justify-center">
+    return <div className="border  h-screen items-center flex justify-center flex-col">
+        <div className="flex border w-fit justify-center rounded-md p-8 backdrop-grayscale-0 ">
             <div className=" ">
                 <div className="text-center px-5">
                     <div className=" text-3xl font-extrabold">
@@ -62,8 +62,6 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
                             }}></LabelledInput>:
                             null}
                     
-                       
-                        
                         <LabelledInput  label="Email" placeholder="abc@gmailc.com" onChange={(e)=>{setemail(e.target.value)}}></LabelledInput>
                         <LabelledInput type="password" label="Password" placeholder="paswe34" onChange={(e)=>{setPassword(e.target.value)
                         }}></LabelledInput>
