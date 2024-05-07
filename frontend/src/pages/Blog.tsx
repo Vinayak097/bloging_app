@@ -2,7 +2,7 @@ import { Appbar } from "../components/Appbar";
 import { Blogskeloton } from "../components/Blogskeleton";
 import { Fullbog } from "../components/Fullblog";
 import { useBlog } from "../hooks";
-import { useNavigate, useParams } from "react-router-dom";
+
 
 export const Blog = () => {
   const {id}=useParams()
