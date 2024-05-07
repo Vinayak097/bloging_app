@@ -22,7 +22,7 @@ blogRouter.use('/*',async(c,next)=>{
         c.status(403)
         return c.json({error:"unathorization"})
     }
-	c.set("payload",payload)
+	
     c.set("userId" ,payload.id)
 	c.set("name",payload? payload.name: "hello")
     await next()
