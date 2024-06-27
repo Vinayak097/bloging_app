@@ -34,7 +34,6 @@ blogRouter.get('/checklogin',async(c)=>{
 		return c.json("logged")
 	}
 }catch(e){
-
 	 c.status(403)
 	return c.json("not logged")
 }
@@ -49,12 +48,11 @@ blogRouter.get('/user/blogs/',async(c) =>{
 		where:{
 			authorId:userId
 		}
-		
 	})
 	return c.json(blogs)
 } )
 blogRouter.delete('/deletepost/:id',async(c)=>{
-
+	try{
 	const postid=await c.req.json()
 	const prisma =new PrismaClient({
 		datasourceUrl:c.env.DATABASE_URL,
@@ -64,10 +62,14 @@ blogRouter.delete('/deletepost/:id',async(c)=>{
 			id:postid
 		}
 	})
+	c.status(200)
 	return c.json(delb)
+}catch(e){
+	c.status(500);
+	return c.json("Internal sever error ")
+}
 })
 // blogRouter.delete('/deleteallreset',async(c)=>{
-
 // 	const userId=c.get('userId')
 // 	const prisma =new PrismaClient({
 // 		datasourceUrl:c.env.DATABASE_URL,
@@ -75,8 +77,6 @@ blogRouter.delete('/deletepost/:id',async(c)=>{
 // 	const delb=await prisma.post.deleteMany({})
 // 	const userdlete=await prisma.user.deleteMany({})
 // 	return c.json({delb,userdlete})
-
-	
 // })
 
 blogRouter.post('/', async(c) => {
