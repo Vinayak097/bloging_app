@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
-
+import { MdDelete } from "react-icons/md";
+import axios from "axios";
+import { backend_url } from "../config";
 interface BlogCardProps{
     authorName:string,
     title:string,
@@ -10,6 +12,14 @@ interface BlogCardProps{
 }
 
 export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps)=>{
+    function Del(id:string |number) {
+        const Delete=async()=>{
+           const r =await axios.delete(`${backend_url}/api/v1/blog/deletepost/${id}`)
+            console.log("id : ",r)
+        }
+        Delete()
+        
+    }
     console.log("passesd : ",id,title)
     return <Link to={`/blog/${id}`}><div className="border  p-4 border-slate-200 pb-4 w-screen max-w-screen-md mt-2  ">
         <div className="flex">
@@ -21,9 +31,11 @@ export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps
                 <Circle></Circle>
             </div>
             <div className="font-thin pl-1 text-slate-500">
-                
              {publishedDate}
-            </div>           
+            </div>   
+            <div className="ml-2" onClick={()=>{Del(id)}}>
+            <MdDelete />
+            </div>        
         </div>   
         <div className=" pt-2 font-semibold text-2xl">
             {title}
