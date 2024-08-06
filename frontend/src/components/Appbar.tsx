@@ -16,16 +16,16 @@ export const Appbar=()=>{
     }
     },[logged])
     
-    return <div className="flex justify-between  px-10 py-2 border-b">
+    return <div className="flex font-serif justify-between  px-10 py-2 border-b ">
      
         <div className="flex flex-col justify-center bg-slate-800 text-white p-2 rounded-md px-3">
             <Link to="/blogs">Home</Link>
         </div>
         
         <div className=" flex flex-row items-center">
-        <div className="mx-8 flex py-1.5 text-lg font-semibold justify-center  bg-green-500 p-1 rounded-md px-4">
-            <Link to="/publish ">  Create</Link>
-        </div>
+        
+            <Link to="/publish " >  <button className="mx-8  text-white flex py-1.5 text-lg font-semibold justify-center  bg-green-500 border bg-opacity-80 hover:shadow-xl transition-all  border-green-700 rounded-md px-4 ">Create</button></Link>
+        
         <div >
             <Avatar size={"big"} name="harkirat"></Avatar>
         </div>

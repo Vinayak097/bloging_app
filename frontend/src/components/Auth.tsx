@@ -39,7 +39,7 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
     };
     
     
-    return <div className="border  h-screen items-center flex justify-center flex-col">
+    return <div className="border font-serif  h-screen items-center flex justify-center flex-col">
         <div className="flex border w-fit justify-center rounded-md p-8 backdrop-grayscale-0 ">
             <div className=" ">
                 <div className="text-center px-5">
@@ -54,8 +54,8 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
 
                 </div>
                 
-                <div className="pt-5">
-                    <div className="">
+                <div className="pt-5 flex justify-center ">
+                    <div className=" w-full">
                         {labeltype==="signup"? 
                          <LabelledInput label="Username" placeholder="abbads23" onChange={(e)=>{
                             setusername(e.target.value)
@@ -70,7 +70,7 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
                             setloding(true)
                             await getpostrequest()
                             setloding(false)  
-                            }} type="button" className="w-full mt-4 text-white bg-gray-800 rounded-md p-2  hover:opacity-50">{Loading ?<Spinner></Spinner> :"Submit"}</button>
+                            }} type="button" className="w-full mt-4 text-white bg-gray-800 rounded-md p-2 text-2xl   hover:opacity-50">{Loading ?<Spinner></Spinner> :"Submit"}</button>
                         </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ function LabelledInput({ label, placeholder, onChange, type }: LabelledInputType
         <div>
             
             <label id="first_name" className="block mb-2 text-sm font-semibold text-black ">{label}</label>
-                <input onChange={onChange} type={type || "text"}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder={placeholder} required />
+                <input onChange={onChange} type={type || "text"}  className="bg-gray-50   border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder={placeholder} required />
         </div>
     );
 }
