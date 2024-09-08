@@ -156,13 +156,15 @@ catch(e){
 })
 
 blogRouter.post('/saves/:id',async(c)=>{
-	const postId=c.req.param.id;
+	const id=c.req.param.id;
 	const prisma = new PrismaClient({
-		datasourceUrl: c.env?.DATABASE_URL	,
+		datasourceUrl: c.env?.DATABASE_URL,
 	}).$extends(withAccelerate());
 	try{
 
-	}catch(erro)
+	}catch(erro){
+
+	}
 })
 
 
