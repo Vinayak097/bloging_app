@@ -2,6 +2,7 @@ import { Appbar } from "./Appbar"
 
 import { Avatar } from "./BlogCard"
 export const Fullbog=({blog}:{blog:any})=>{
+    console.log(blog)
     return <div>
         <Appbar></Appbar>
         <div className="flex  justify-center">

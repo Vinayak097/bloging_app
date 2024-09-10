@@ -17,8 +17,7 @@ export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps
            const r =await axios.delete(`${backend_url}/api/v1/blog/deletepost/${id}`)
             console.log("id : ",r)
         }
-        Delete()
-        
+        Delete();
     }
     console.log("passesd : ",id,title)
     return <Link to={`/blog/${id}`}><div className="border  p-4 border-slate-200 pb-4 w-screen max-w-screen-md mt-2  ">

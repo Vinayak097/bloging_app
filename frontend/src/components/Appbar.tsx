@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom"
 import { Avatar } from "./BlogCard"
+import '../App.css'
 import { useEffect } from "react"
 
 
@@ -24,7 +25,7 @@ export const Appbar=()=>{
         
         <div className=" flex flex-row items-center">
         
-            <Link to="/publish " >  <button className="mx-8  text-white flex py-1.5 text-lg font-semibold justify-center  bg-green-500 border bg-opacity-80 hover:shadow-xl transition-all  border-green-700 rounded-md px-4 ">Create</button></Link>
+            <Link to="/publish " className="" >  <button className="mx-8 border border-green-900 bg-opacity-80 text-white flex py-1.5 text-lg font-semibold justify-center  bg-green-500   hover:shadow-xl transition-all  rounded-md px-4 ">Create</button></Link>
         
         <div >
             <Avatar size={"big"} name="harkirat"></Avatar>

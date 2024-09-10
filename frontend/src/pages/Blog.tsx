@@ -10,13 +10,12 @@ export const Blog = () => {
   const { loading, blog } = useBlog(id || "feb93749-eb56-449c-921a-41a30d904be0");
   const navigate=useNavigate()
 
-  if (loading) {
-    return <div className="">
+  if (loading){
+    return <div className=" ">
     <Appbar></Appbar>
     <div className="grid grid-cols-3 mt-2 justify-center">
         <div className="mt-4 col-span-2">
         <Blogskeloton></Blogskeloton>    
-    
         </div>
         <div className="col-span-1">
         <Blogskeloton></Blogskeloton>   
