@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { backend_url } from "../config";
+
 interface BlogCardProps{
     authorName:string,
     title:string,
@@ -11,7 +12,9 @@ interface BlogCardProps{
    
 }
 
+
 export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps)=>{
+    
     function Del(id:string |number) {
         const Delete=async()=>{
            const r =await axios.delete(`${backend_url}/api/v1/blog/deletepost/${id}`)
@@ -19,12 +22,12 @@ export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps
         }
         Delete();
     }
-    console.log("passesd : ",id,title)
+    
     return <Link to={`/blog/${id}`}><div className="border  p-4 border-slate-200 pb-4 w-screen max-w-screen-md mt-2  ">
         <div className="flex">
             <Avatar name={authorName || "hello"} size="small"/>
             <div className="font-extralight text-black pl-2"> 
-            {authorName}
+                {authorName}
             </div>
             <div className="flex pl-2 justify-center flex-col">
                 <Circle></Circle>
@@ -51,13 +54,12 @@ export const BlogCart=({authorName,title,content,publishedDate,id}:BlogCardProps
 }
 export function Circle(){
     return <div className="h-1 w-1  rounded-full bg-slate-400">
-
     </div>
 }
+
+
 export function Avatar({name,size="small"}:{name:string,size:"small" |"big"}){
-    
-return <div className={`  relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ${size==="small" ? "w-6 h-6" :"w-8 h-8"}`}>
+return <div className={`relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 ${size==="small" ? "w-6 h-6" :"w-8 h-8"}`}>
     <span className={`font-medium text-gray-600 dark:text-gray-300 ${size==="small" ? " text-xs ":" text-md"}`}>{name[0]}</span>
 </div>
-
 }

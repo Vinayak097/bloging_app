@@ -4,16 +4,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Spinner } from "./Spinner";
 import { useNavigate } from "react-router-dom";
-
 import {backend_url} from '../config.js'
+import { useRecoilState } from "recoil";
+import { useratom } from "../utils/atomuser.js";
 
 
 export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
+    const [user,setUser]=useRecoilState(useratom);
+    console.log("user name ", user);
     const [name,setusername]=useState("")
     const [Loading,setloding]=useState(false);
     const navigate=useNavigate()
-    const [password,setPassword]=useState("")
-    const [email,setemail]=useState("")
+    const [password,setPassword]=useState("");
+    const [email,setemail]=useState("");
     
    
     
@@ -26,7 +29,9 @@ export const Auth=({labeltype}:{labeltype :"signin" |"signup"})=>{
                 { email, password,name }
             );
             const jwt = response.data;
+            console.log("respondata " , jwt);
             localStorage.setItem("token", jwt.jwt);
+            setUser(jwt.user);
             setloding(false)
             
             

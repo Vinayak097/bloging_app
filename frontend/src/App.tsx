@@ -30,7 +30,6 @@ function App() {
             <Route path='/blogs' element={<Blogs></Blogs>}></Route>
             <Route path="/blog/:id" element={<Blog />} />
             <Route path='/publish' element={ <Publish></Publish>}></Route>
-           
             </Routes>
           </BrowserRouter>
         </div>

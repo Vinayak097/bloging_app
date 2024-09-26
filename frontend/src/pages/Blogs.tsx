@@ -8,13 +8,12 @@ import { Blogskeloton } from "../components/Blogskeleton";
 export function  Blogs(){
     
     const {loading,blogs}=useBlogs();
-    console.log("blogs :" ,blogs)
+   
     
     if(loading){
         return <div className="">
             <Appbar></Appbar>
             <div className="mt-2 flex justify-center">
-                
                 <div className="mt-4">
                 <Blogskeloton></Blogskeloton>    
             <Blogskeloton></Blogskeloton>    
@@ -36,7 +35,6 @@ export function  Blogs(){
             
         <div className=" flex justify-center ">
             <div className=" ">
-                
             {blogs.map(blog => (
                 
     <BlogCart

@@ -59,7 +59,7 @@ userRouter.post('/signup', async (c) => {
       })
       const jwt= await sign({id:user.id},c.env.JWT_SECRET);
       c.status(200)
-      return c.json({jwt})
+      return c.json({jwt:jwt, user:{name:user.name,email:user.email}})
   
     }
     catch(e){
@@ -99,6 +99,6 @@ const user=await prisma.user.findFirst({
 
 
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ jwt });
+    return c.json({ jwt:jwt, user:{name:user.name,email:user.email} });
 
 })

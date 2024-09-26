@@ -13,6 +13,7 @@ model User {
   name     String?
   password String 
   posts    Post[]
+  save     Post[]
 }
 
 model Post { 
