@@ -28,11 +28,7 @@ const ProfileDropdown = (dp:any) => {
     <div className="relative profile-dropdown">
       {/* Avatar/Profile Icon */}
       <div onClick={toggleDropdown} className="cursor-pointer">
-        <img 
-          src={dp? dp:"https://via.placeholder.com/40"} 
-          alt="Profile" 
-          className="rounded-full w-10 h-10" 
-        />
+        <span className='w-10 h-10 rounded-full border py-2 px-3 bg-slate-400'>{dp.dp}</span>
       </div>
 
       {/* Dropdown Menu */}
